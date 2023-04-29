@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { DragEvent, DragEventHandler, useRef, useState } from "react";
+import { useState } from "react";
 import styles from "./styles.module.scss";
 
 import { ITask } from "../../models/ITask";
