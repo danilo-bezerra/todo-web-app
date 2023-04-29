@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./styles.module.scss";
 
 import { ITask } from "../../models/ITask";
 import { Button } from "../Button";
 import { TodoItem } from "../TodoItem";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 type Props = {
   list: ITask[];
@@ -25,6 +26,8 @@ export function TodoList({
   );
   const [dragItemId, setDragItemId] = useState<null | string>(null);
   const [dragOverItemId, setDragOverItemId] = useState<null | string>(null);
+
+  const { theme } = useContext(ThemeContext);
 
   const completedTasks = list.filter((t) => t.done);
   const activeTasks = list.filter((t) => !t.done);
@@ -62,7 +65,7 @@ export function TodoList({
   }
 
   return (
-    <section className={styles.todoContainer}>
+    <section className={`${styles.todoContainer} ${styles[theme]}`}>
       <header className={styles.header}>
         <span className={styles.leftCount}>
           {activeTasks.length} items left

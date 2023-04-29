@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useContext } from "react";
 import styles from "./styles.module.scss";
 
 import { ITask } from "../../models/ITask";
@@ -6,6 +6,7 @@ import { ITask } from "../../models/ITask";
 import iconCross from "../../assets/icon-cross.svg";
 import iconCheck from "../../assets/icon-check.svg";
 import { Button } from "../Button";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 type Props = HTMLAttributes<HTMLLIElement> & {
   task: ITask;
@@ -14,10 +15,13 @@ type Props = HTMLAttributes<HTMLLIElement> & {
 };
 
 export function TodoItem({ task, onCheck, onDelete, ...rest }: Props) {
+  const { theme } = useContext(ThemeContext);
   return (
     <li
       key={task.id}
-      className={`${styles.todoListItem} ${task.done ? styles.done : ""}`}
+      className={`${styles.todoListItem} ${task.done ? styles.done : ""} ${
+        styles[theme]
+      }`}
       draggable
       {...rest}
     >

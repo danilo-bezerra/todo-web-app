@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./App.scss";
 import { ITask } from "./models/ITask";
 import { Header } from "./components/Header";
 import { CreateTodo } from "./components/CreateTodo";
 import { TodoList } from "./components/TodoList";
+import { ThemeContext } from "./contexts/ThemeContext";
 
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
+  const { theme } = useContext(ThemeContext);
 
   function handleAddTask(task: string) {
     const list = [...tasks, { id: crypto.randomUUID(), task, done: false }];
@@ -48,7 +50,7 @@ function App() {
 
   return (
     <>
-      <div className="App">
+      <div className={`App ${theme}`}>
         <Header />
         <CreateTodo onCreate={handleAddTask} />
         <TodoList

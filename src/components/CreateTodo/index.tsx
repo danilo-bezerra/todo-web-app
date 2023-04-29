@@ -1,5 +1,6 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import styles from "./styles.module.scss";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 type Props = {
   onCreate: (task: string) => void;
@@ -7,6 +8,7 @@ type Props = {
 
 export function CreateTodo({ onCreate }: Props) {
   const [task, setTask] = useState("");
+  const { theme } = useContext(ThemeContext);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -18,7 +20,7 @@ export function CreateTodo({ onCreate }: Props) {
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={`${styles.form} ${styles[theme]}`} onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Create a new todo..."

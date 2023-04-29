@@ -1,8 +1,14 @@
 .App {
   background-image: url("./assets/bg-desktop-dark.jpg");
   background-repeat: no-repeat;
+  background-position: top center;
 
   font-size: 18px;
   min-height: 100vh;
   padding: 0 1rem;
+
+  &.light {
+    background-color: #e4e5f1;
+    background-image: url("./assets/bg-desktop-light.jpg");
+  }
 }

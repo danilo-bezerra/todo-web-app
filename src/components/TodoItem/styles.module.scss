@@ -12,6 +12,21 @@
       text-decoration: line-through;
       color: #777a92;
     }
+
+    .taskItemCheck {
+      background-color: green;
+      background: rgb(59, 199, 235);
+      background: linear-gradient(
+        273deg,
+        rgba(59, 199, 235, 1) 0%,
+        rgba(68, 181, 86, 1) 100%
+      );
+      border: none;
+    }
+  }
+
+  &.light {
+    color: #484b6a;
   }
 
   .taskItemCheck {

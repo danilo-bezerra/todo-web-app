@@ -1,20 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./styles.module.scss";
 
 import iconMoon from "../../assets/icon-moon.svg";
 import iconSun from "../../assets/icon-sun.svg";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { Button } from "../Button";
 
 export function ThemeToggler() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-
-  function handleToggle() {
-    setTheme((t) => (t == "dark" ? "light" : "dark"));
-    document.body.classList.toggle("dark");
-  }
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <button className={styles.themeToggler} onClick={handleToggle}>
+    <Button onClick={toggleTheme}>
       <img src={theme == "dark" ? iconMoon : iconSun} alt="" />
-    </button>
+    </Button>
   );
 }
