@@ -1,0 +1,108 @@
+.todoContainer {
+  background-color: #25273c;
+  max-width: 540px;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+
+  .button {
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: 0.25s color;
+    font-size: 0.9rem;
+
+    &:hover {
+      color: #3a7bfd;
+    }
+
+    &.primary {
+      color: #3a7bfd;
+    }
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    color: #777a92;
+
+    .leftCount {
+      font-weight: 400;
+      font-size: 0.75rem;
+    }
+
+    .listTypeNav {
+      display: flex;
+      gap: 0.75rem;
+    }
+  }
+
+  .todoList {
+    .todoListItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 1.5rem;
+      color: #fafafa;
+      border-top: 1px solid #4d5066;
+
+      &.done {
+        span {
+          text-decoration: line-through;
+          color: #777a92;
+        }
+      }
+
+      .taskItemCheck {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 1px solid #777a92;
+        border-radius: 50%;
+        flex-shrink: 0;
+
+        img {
+          flex-shrink: 0;
+        }
+      }
+
+      span {
+        width: 100%;
+      }
+
+      .button {
+        display: none;
+      }
+
+      &:hover {
+        .button {
+          display: initial;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .todoContainer {
+    position: relative;
+
+    padding-top: 2.5rem;
+
+    .header {
+      .listTypeNav {
+        position: absolute;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        background-color: #25273c;
+        padding: 1rem 1.5rem;
+        top: 0;
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+    }
+  }
+}
