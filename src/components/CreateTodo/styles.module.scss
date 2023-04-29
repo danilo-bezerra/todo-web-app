@@ -10,14 +10,17 @@
   margin-bottom: 1.5rem;
   box-shadow: 10px 10px 31px -22px rgba(0, 0, 0, 0.75);
 
-  &.light {
-    background-color: #fafafa;
-  }
-
   input {
     background-color: transparent;
     font-size: 18px;
     width: 100%;
     padding: 0 1.5rem;
+  }
+
+  &.light {
+    background-color: #fafafa;
+    input {
+      color: hsl(235, 19%, 35%);
+    }
   }
 }
