@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import styles from "./styles.module.scss";
+import { useContext } from "react";
 
 import iconMoon from "../../assets/icon-moon.svg";
 import iconSun from "../../assets/icon-sun.svg";
