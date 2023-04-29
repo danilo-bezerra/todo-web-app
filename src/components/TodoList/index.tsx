@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { DragEvent, DragEventHandler, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 
 import { ITask } from "../../models/ITask";
@@ -10,12 +11,21 @@ type Props = {
   onClearCompleted: () => void;
   onCheck: (task: ITask) => void;
   onDelete: (task: ITask) => void;
+  onUpdateList: (list: ITask[]) => void;
 };
 
-export function TodoList({ list, onCheck, onDelete, onClearCompleted }: Props) {
+export function TodoList({
+  list,
+  onCheck,
+  onDelete,
+  onClearCompleted,
+  onUpdateList,
+}: Props) {
   const [listType, setListType] = useState<"all" | "completed" | "active">(
     "all"
   );
+  const [dragItemId, setDragItemId] = useState<null | string>(null);
+  const [dragOverItemId, setDragOverItemId] = useState<null | string>(null);
 
   const completedTasks = list.filter((t) => t.done);
   const activeTasks = list.filter((t) => !t.done);
@@ -26,6 +36,31 @@ export function TodoList({ list, onCheck, onDelete, onClearCompleted }: Props) {
       : listType == "active"
       ? activeTasks
       : list;
+
+  function handleDragStart(id: string) {
+    setDragItemId(id);
+  }
+
+  function handleDragEnter(id: string) {
+    setDragOverItemId(id);
+  }
+
+  function handleDragEnd() {
+    if (dragItemId && dragOverItemId) {
+      const dragItem: ITask = list.find((t) => t.id == dragItemId)!;
+      const dragOverItem: ITask = list.find((t) => t.id == dragOverItemId)!;
+      const newList = list.map((t) =>
+        t.id == dragItemId
+          ? dragOverItem
+          : t.id == dragOverItemId
+          ? dragItem
+          : t
+      );
+      onUpdateList(newList);
+      setDragItemId(null);
+      setDragOverItemId(null);
+    }
+  }
 
   return (
     <section className={styles.todoContainer}>
@@ -59,7 +94,15 @@ export function TodoList({ list, onCheck, onDelete, onClearCompleted }: Props) {
       </header>
       <ul className={styles.todoList}>
         {taskList.map((t) => (
-          <TodoItem key={t.id} onCheck={onCheck} onDelete={onDelete} task={t} />
+          <TodoItem
+            key={t.id}
+            onCheck={onCheck}
+            onDelete={onDelete}
+            task={t}
+            onDragStart={() => handleDragStart(t.id)}
+            onDragEnter={() => handleDragEnter(t.id)}
+            onDragEnd={handleDragEnd}
+          />
         ))}
       </ul>
     </section>

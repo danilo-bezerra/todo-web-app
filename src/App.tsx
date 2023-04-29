@@ -30,6 +30,10 @@ function App() {
     saveTasks(list);
   }
 
+  function updateList(list: ITask[]) {
+    saveTasks(list);
+  }
+
   function saveTasks(list: ITask[]) {
     localStorage.setItem("tasks", JSON.stringify(list));
     setTasks(list);
@@ -52,6 +56,7 @@ function App() {
           onClearCompleted={handleClearCompleted}
           onCheck={handleToggleTaskDone}
           onDelete={handleDeleteTask}
+          onUpdateList={updateList}
         />
       </div>
     </>
