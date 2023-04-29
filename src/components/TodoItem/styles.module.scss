@@ -1,0 +1,46 @@
+.todoListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 1.5rem;
+  color: #fafafa;
+  border-top: 1px solid #4d5066;
+
+  &.done {
+    span {
+      text-decoration: line-through;
+      color: #777a92;
+    }
+  }
+
+  .taskItemCheck {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 1px solid #777a92;
+    border-radius: 50%;
+    flex-shrink: 0;
+    cursor: pointer;
+
+    img {
+      flex-shrink: 0;
+    }
+  }
+
+  span {
+    width: 100%;
+  }
+
+  button {
+    display: none;
+  }
+
+  &:hover {
+    button {
+      display: initial;
+    }
+  }
+}

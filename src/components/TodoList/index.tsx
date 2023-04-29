@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styles from "./styles.module.scss";
 
-import iconCross from "../../assets/icon-cross.svg";
-import iconCheck from "../../assets/icon-check.svg";
 import { ITask } from "../../models/ITask";
+import { Button } from "../Button";
+import { TodoItem } from "../TodoItem";
 
 type Props = {
   list: ITask[];
@@ -35,50 +35,31 @@ export function TodoList({ list, onCheck, onDelete, onClearCompleted }: Props) {
         </span>
 
         <nav className={styles.listTypeNav}>
-          <button
-            className={`${styles.button} ${
-              listType == "all" ? styles.primary : ""
-            }`}
+          <Button
+            className={`${listType == "all" ? "primary" : ""}`}
             onClick={() => setListType("all")}
           >
             All
-          </button>
-          <button
-            className={`${styles.button} ${
-              listType == "active" ? styles.primary : ""
-            }`}
+          </Button>
+          <Button
+            className={`${listType == "active" ? "primary" : ""}`}
             onClick={() => setListType("active")}
           >
             Active
-          </button>
-          <button
-            className={`${styles.button} ${
-              listType == "completed" ? styles.primary : ""
-            }`}
+          </Button>
+          <Button
+            className={`${listType == "completed" ? "primary" : ""}`}
             onClick={() => setListType("completed")}
           >
             Completed
-          </button>
+          </Button>
         </nav>
 
-        <button className={styles.button} onClick={onClearCompleted}>
-          Clear Completed
-        </button>
+        <Button onClick={onClearCompleted}>Clear Completed</Button>
       </header>
       <ul className={styles.todoList}>
         {taskList.map((t) => (
-          <li
-            key={t.id}
-            className={`${styles.todoListItem} ${t.done ? styles.done : ""}`}
-          >
-            <div className={styles.taskItemCheck} onClick={() => onCheck(t)}>
-              {t.done && <img src={iconCheck} />}
-            </div>
-            <span>{t.task}</span>
-            <button className={styles.button} onClick={() => onDelete(t)}>
-              <img src={iconCross} alt="" />
-            </button>
-          </li>
+          <TodoItem key={t.id} onCheck={onCheck} onDelete={onDelete} task={t} />
         ))}
       </ul>
     </section>

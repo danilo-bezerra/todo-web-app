@@ -1,0 +1,15 @@
+.button {
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: 0.25s;
+  font-size: 0.9rem;
+
+  &:hover {
+    color: #3a7bfd;
+  }
+
+  &.primary {
+    color: #3a7bfd;
+  }
+}
